@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<!--
+ Order Value Shipping for Vvveb
+ Copyright (C) 2022  Ziadin Givan
+ Copyright (C) 2026  Ezyweb.uk
+ Based on the Vvveb Default Shipping plugin, adapted by Ezyweb.uk
+ Licensed under the GNU Affero General Public License v3 or later, see the LICENSE file
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="/favicon.ico">
+
+
+  <base href="">
+
+  <title>Vvveb - Shipping methods</title>
+
+  <link href="css/admin.css" rel="stylesheet">
+</head>
+
+
+<body>
+
+  <div id="container">
+
+    <aside class="sidebar" data-v-copy-from="index.html,.sidebar">
+    </aside>
+
+
+    <main class="main">
+
+      <header class="clearfix top-header" data-v-copy-from="index.html,.top-header">
+
+      </header>
+
+	  <form id="shipping-form" action="" method="post" class="settings" data-v-product enctype="multipart/form-data">
+        <input type="hidden" name="action" id="action" value="save">
+        <input type="hidden" name="csrf" data-v-csrf>
+        <input type="hidden" name="active_tab" id="active_tab" value="<?php echo htmlspecialchars($_POST['active_tab'] ?? $_GET['tab'] ?? 0); ?>">
+
+        <header class="actions">
+          <div class="title">
+            <h4 class="text-muted mt-2">
+              <svg class="svg-icon la-lg" aria-hidden="true"><use href="/admin/default/img/icons.svg#truck-delivery"></use></svg>
+              Shipping methods
+            </h4>
+          </div>
+          <div class="btns">
+			<a href="{$this.adminPath}index.php?module=plugin/plugins" title="Plugins list"
+					class="btn btn-icon btn-outline-secondary me-2">
+						<svg class="svg-icon" aria-hidden="true"><use href="/admin/default/img/icons.svg#arrow-left"></use></svg> <span>Plugins list</span>
+			</a>
+          <button type="submit" href="" class="btn btn-primary btn-icon ms-1" title="Save post">
+            <svg class="svg-icon" aria-hidden="true"><use href="/admin/default/img/icons.svg#pencil"></use></svg> <span>Save settings</span>
+          </button>
+        </div>
+        </header>
+        <div>
+          <div id="main-content">
+
+         	<div class="notifications" data-v-notifications data-v-copy-from="index.html,.notifications"></div>
+
+            <div class="content clearfix shipping px-4 row">
+
+
+			  <ul class="nav nav-tabs" id="option" role="tablist" data-v-methods>
+				<li class="nav-item me-2">
+				  <button class="btn btn-outline-secondary btn-icon py-1 mb-1" type="button" onclick="addTab(this)">
+					<svg class="svg-icon" aria-hidden="true"><use href="/admin/default/img/icons.svg#plus"></use></svg>
+					<span>Add shipping method</span>
+				  </button>
+				</li>
+				<li class="nav-item" data-v-method>
+				  <a href="#tab-option0" class="nav-link" data-bs-toggle="tab" data-v-method-shipping_method_id>
+					<span data-v-method-name>Default</span>
+					<svg class="svg-icon text-danger ms-2" onclick="removeTab(this, 'shipping_method_id')" aria-hidden="true"><use href="/admin/default/img/icons.svg#circle-minus"></use></svg>
+					</a>
+				</li>
+				<li class="nav-item d-none tab-nav-template">
+				  <a href="#tab-template" class="nav-link" data-bs-toggle="tab">
+					<span>New shipping method</span>
+					<svg class="svg-icon text-danger ms-2" onclick="removeTab(this, 'shipping_method_id')" aria-hidden="true"><use href="/admin/default/img/icons.svg#circle-minus"></use></svg>
+					</a>
+				</li>
+			  </ul>
+
+			 <div class="tab-content" data-v-methods>
+
+				<div class="tab-pane" data-type="text" id="tab-option0" data-v-method>
+
+				  <div class="row mb-3">
+					<label for="input-geo-region" class="col-sm-2 col-form-label">Geo Region</label>
+					<div class="col-sm-10">
+					  <select name="methods[0][region_group_id]" id="input-geo-region" class="form-select" data-v-region_group_id>
+							<option value="0"> --- All zones --- </option>
+							<option value="0" data-v-option>All Regions</option>
+							<option value="1" data-v-option>US Shipping</option>
+							<option value="2" data-v-option>UK VAT Region</option>
+						</select>
+					</div>
+				  </div>
+
+				  <div class="row mb-3">
+					<label for="input-shipping-status" class="col-sm-2 col-form-label">Shipping status</label>
+					<div class="col-sm-10">
+						<select name="methods[0][shipping_status_id]" id="input-shipping-status" class="form-select" data-v-shipping_status_id>
+							  <option value="1" data-v-option>Pending</option>
+							  <option value="2" data-v-option>Complete</option>
+					  </select>
+					</div>
+				  </div>
+
+				  <div class="row mb-3">
+					<label for="input-sort-order" class="col-sm-2 col-form-label">Sort Order</label>
+					<div class="col-sm-10">
+					  <input type="text" name="methods[0][sort_order]" value="1" placeholder="Sort Order" id="input-sort-order" class="form-control method" data-v-sort_order>
+					</div>
+				  </div>
+
+
+					<div class="mt-5">
+						<ul class="nav nav-tabs language-nav mb-3 me-3" id="seo-language-nav" data-v-languages="seo" style="margin-top: -2.5rem;right: 2.5rem;">
+							<li class="nav-item" data-v-language>
+								<a href="#language1" class="nav-link" data-bs-toggle="tab" aria-expanded="true" data-v-language-link>
+									<!-- img src="language/en-gb/en-gb.png" title="English" data-v-language-img -->
+									<span data-v-language-name>English</span>
+								</a>
+							</li>
+						 </ul>
+
+
+
+						   <div class="tab-content" data-v-languages="shipping" style="clear:both">
+							<div class="tab-pane" id="language1" data-v-language data-v-language-id>
+
+							  <div class="row mb-3">
+									<label for="input-title" class="col-sm-2 col-form-label">Name</label>
+									<div class="col-sm-10">
+									  <input type="text" name="methods[0][lang][1][title]" value="" id="input-title" class="form-control" placeholder="Flat rate shipping" data-v-lang-title>
+									</div>
+								  </div>
+								  <div class="row mb-3">
+									<label for="input-description" class="col-sm-2 col-form-label">Shipping instructions/message</label>
+									<div class="col-sm-10">
+									  <textarea name="methods[0][lang][1][description]" value="0" rows="5" placeholder="Pay the courier on delivery" id="input-description" class="form-control" data-v-lang-description></textarea>
+									</div>
+								  </div>
+
+								<div class="row mb-3">
+									<label for="input-free" class="col-sm-2 col-form-label">
+										<span>Free shipping message</span>
+										<span title="Use %s to display cost difference">
+										  <svg class="svg-icon la-lg text-primary" aria-hidden="true"><use href="/admin/default/img/icons.svg#help-circle"></use></svg>
+										</span>
+									</label>
+									<div class="col-sm-10">
+									  <textarea name="methods[0][lang][1][free_message]" value="0" rows="3" placeholder="Add more products worth at least %s to get free shipping!" id="input-free" class="form-control" data-v-lang-free_message>Add more products worth at least %s to get free shipping!</textarea>
+									</div>
+								  </div>
+
+								</div>
+							</div>
+
+						</div>
+
+
+					  <div class="row mb-3">
+						<label for="input-tax-type" class="col-sm-2 col-form-label">Tax Class</label>
+						<div class="col-sm-10">
+						  <select name="methods[0][tax_type_id]" id="input-tax-type" class="form-select" data-v-tax_type_id>
+							  <option value="0"> --- None --- </option>
+							  <option value="10" data-v-option>Downloadable Products</option>
+							  <option value="9" data-v-option>Taxable Goods</option>
+						  </select>
+						</div>
+					  </div>
+
+					  <div class="row mb-3">
+						<label for="input-cost" class="col-sm-2 col-form-label">
+							<span>Base Cost</span>
+							<span title="Leave empty to for free shipping">
+							  <svg class="svg-icon la-lg text-primary" aria-hidden="true"><use href="/admin/default/img/icons.svg#help-circle"></use></svg>
+							</span>
+						</label>
+						<div class="col-sm-10">
+						  <input type="text" name="methods[0][cost]" value="3.00" placeholder="Cost" id="input-cost" class="form-control method" data-v-cost>
+						</div>
+					  </div>
+
+
+
+						<div class="row mb-3">
+							<label for="input-free-shipping" class="col-sm-2 col-form-label">
+								<span>Cart total for free shipping</span>
+								<span title="Set to zero to disable free shipping">
+								  <svg class="svg-icon la-lg text-primary" aria-hidden="true"><use href="/admin/default/img/icons.svg#help-circle"></use></svg>
+								</span>
+							</label>
+							<div class="col-sm-10">
+							  <input type="text" name="methods[0][free_shipping]" value="0.00" step="0.01" min="0"  placeholder="Total for free shipping" id="input-free-shipping" class="form-control method" data-v-free_shipping>
+							</div>
+						  </div>
+
+						<div class="table-responsive">
+							<table class="table table-hover table-bordered rates-table" data-v-rates>
+								<thead>
+									<tr>
+										<th class="text-start">
+											<span>Order Subtotal (From and above)</span>
+											<span title="Minimum cart subtotal required to trigger this rate tier">
+												<svg class="svg-icon la-lg text-primary" aria-hidden="true"><use href="/admin/default/img/icons.svg#help-circle"></use></svg>
+											</span>
+										</th>
+										<th class="text-end">Shipping Price</th>
+										<th class="text-end">
+											<button type="button" class="btn btn-sm btn-primary" id="add-rate-btn" onclick='addMethodRate(this)'>
+												<svg class="svg-icon la-lg text-white" aria-hidden="true"><use href="/admin/default/img/icons.svg#plus"></use></svg>
+											</button>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- Existing / Loaded Rate Row -->
+									<tr data-v-rate>
+										<td class="text-start">
+											<input name="methods[0][rates][0][price_from]" value="0.00" placeholder="0.00" class="form-control" type="number" step="0.01" data-v-rate-price_from>
+										</td>
+										<td class="text-end">
+											<input name="methods[0][rates][0][cost]" value="5.00" placeholder="0.00" class="form-control" type="number" step="0.01" data-v-rate-cost>
+										</td>
+										<td class="text-end">
+											<button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger">
+												<svg class="svg-icon la-lg" aria-hidden="true"><use href="/admin/default/img/icons.svg#circle-minus"></use></svg>
+											</button>
+										</td>
+									</tr>
+									<!-- Dynamic Template Row (Removed 'disabled' so JS clones active elements) -->
+									<tr class="d-none rate-template">
+										<td class="text-start">
+											<input name="methods[0][rates][#][price_from]" value="0.00" placeholder="0.00" class="form-control method" type="number" step="0.01" disabled data-v-rate-price_from>
+										</td>
+										<td class="text-end">
+											<input name="methods[0][rates][#][cost]" value="0.00" placeholder="0.00" class="form-control method" type="number" step="0.01" disabled data-v-rate-cost>
+										</td>
+										<td class="text-end">
+											<button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger">
+												<svg class="svg-icon la-lg" aria-hidden="true"><use href="/admin/default/img/icons.svg#circle-minus"></use></svg>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+
+				<div class="tab-pane tab-content-template d-none" data-type="text" data-id="#">
+
+					  <div class="row mb-3">
+						<label for="input-geo-region" class="col-sm-2 col-form-label">Geo Region</label>
+						<div class="col-sm-10">
+						  <select name="methods[0][region_group_id]" id="input-geo-region" class="form-select" disabled data-v-region_group_id>
+								<option value="0"> --- All zones --- </option>
+								<option value="0" data-v-option>All Regions</option>
+								<option value="1" data-v-option>US Shipping</option>
+								<option value="2" data-v-option>UK VAT Region</option>
+							</select>
+						</div>
+					  </div>
+
+					  <div class="row mb-3">
+						<label for="input-shipping-status" class="col-sm-2 col-form-label">Shipping status</label>
+						<div class="col-sm-10">
+							<select name="methods[0][shipping_status_id]" id="input-shipping-status" class="form-select" disabled data-v-shipping_status_id>
+								  <option value="1" data-v-option>Pending</option>
+								  <option value="2" data-v-option>Complete</option>
+						  </select>
+						</div>
+					  </div>
+
+					  <div class="row mb-3">
+						<label for="input-sort-order" class="col-sm-2 col-form-label">Sort Order</label>
+						<div class="col-sm-10">
+						  <input type="text" name="methods[0][sort_order]" value="1" placeholder="Sort Order" id="input-sort-order" disabled class="form-control method" data-v-sort_order>
+						</div>
+					  </div>
+
+						<div class="mt-5">
+							<ul class="nav nav-tabs language-nav mb-3 me-3" id="seo-language-nav" data-v-languages="shipping" style="margin-top: -2.5rem;right: 2.5rem;">
+								<li class="nav-item" data-v-language>
+									<a href="#language1" class="nav-link" data-bs-toggle="tab" aria-expanded="true" data-v-language-link>
+										<span data-v-language-name>English</span>
+									</a>
+								</li>
+							 </ul>
+
+							   <div class="tab-content" data-v-languages="shipping" style="clear:both">
+								<div class="tab-pane" id="language1" data-v-language data-v-language-id>
+
+								  <div class="row mb-3">
+										<label for="input-title" class="col-sm-2 col-form-label">Name</label>
+										<div class="col-sm-10">
+										  <input type="text" name="methods[0][lang][1][title]" value="" id="input-title" class="form-control" placeholder="New shipping method" disabled data-v-lang-title>
+										</div>
+									  </div>
+									  <div class="row mb-3">
+										<label for="input-description" class="col-sm-2 col-form-label">Shipping instructions/message</label>
+										<div class="col-sm-10">
+										  <textarea name="methods[0][lang][1][description]" value="0" rows="5" placeholder="Pay the courier on delivery" id="input-description" class="form-control" disabled data-v-lang-description></textarea>
+										</div>
+									  </div>
+
+									  <div class="row mb-3">
+										<label for="input-free" class="col-sm-2 col-form-label">
+											<span>Free shipping message</span>
+											<span title="Use %s to display cost difference">
+											  <svg class="svg-icon la-lg text-primary" aria-hidden="true"><use href="/admin/default/img/icons.svg#help-circle"></use></svg>
+											</span>
+										</label>
+										<div class="col-sm-10">
+										  <textarea name="methods[0][lang][1][free_message]" value="0" rows="3" placeholder="Add more products worth at least %s to get free shipping!" id="input-free" class="form-control" disabled data-v-lang-free_message>Add more products worth at least %s to get free shipping!</textarea>
+										</div>
+									  </div>
+
+									</div>
+								</div>
+
+							</div>
+
+							  <div class="row mb-3">
+								<label for="input-tax-type" class="col-sm-2 col-form-label">Tax Class</label>
+								<div class="col-sm-10">
+								  <select name="methods[0][tax_type_id]" id="input-tax-type" class="form-select" disabled data-v-tax_type_id>
+									  <option value="0"> --- None --- </option>
+									  <option value="10" data-v-option>Downloadable Products</option>
+									  <option value="9" data-v-option>Taxable Goods</option>
+								  </select>
+								</div>
+							  </div>
+							<div class="row mb-3">
+								<label for="input-cost" class="col-sm-2 col-form-label">
+									<span>Base Cost</span>
+									<span title="Leave empty to for free shipping">
+									  <svg class="svg-icon la-lg text-primary" aria-hidden="true"><use href="/admin/default/img/icons.svg#help-circle"></use></svg>
+									</span>
+								</label>
+								<div class="col-sm-10">
+								  <input type="text" name="methods[0][cost]" value="3.00" placeholder="Cost" id="input-cost" class="form-control method" disabled data-v-cost>
+								</div>
+							  </div>
+							<div class="row mb-3">
+								<label for="input-free-shipping" class="col-sm-2 col-form-label">
+									<span>Cart total for free shipping</span>
+									<span title="Set to zero to disable free shipping">
+									  <svg class="svg-icon la-lg text-primary" aria-hidden="true"><use href="/admin/default/img/icons.svg#help-circle"></use></svg>
+									</span>
+								</label>
+								<div class="col-sm-10">
+								  <input type="text" name="methods[0][free_shipping]" value="0.00" step="0.01" min="0"  placeholder="Total for free shipping" id="input-free-shipping" class="form-control method" disabled data-v-free_shipping>
+								</div>
+							  </div>
+
+							<div class="table-responsive">
+								<table class="table table-hover table-bordered rates-table" data-v-rates>
+									<thead>
+									<tr>
+										<th class="text-start">
+											<span>Order Subtotal (From and above)</span>
+										    <span title="Minimum cart subtotal required to trigger this rate tier">
+										    	<svg class="svg-icon la-lg text-primary" aria-hidden="true"><use href="/admin/default/img/icons.svg#help-circle"></use></svg>
+                							</span>
+										</th>
+										<th class="text-end">Shipping Price</th>
+										<th class="text-end">
+											<button type="button" class="btn btn-sm btn-primary" id="add-rate-btn" onclick='addMethodRate(this)'>
+												<svg class="svg-icon la-lg text-white" aria-hidden="true"><use href="/admin/default/img/icons.svg#plus"></use></svg>
+											</button>
+										</th>
+									</tr>
+									</thead>
+									<tbody>
+										<tr data-v-rate>
+										  <td class="text-start">
+												<input name="methods[0][rates][0][price_from]" value="0.00" placeholder="0.00" class="form-control" type="number" step="0.01" disabled data-v-rate-price_from>
+										  </td>
+										  <td class="text-end">
+												<input name="methods[0][rates][0][cost]" value="5.00" placeholder="0.00" class="form-control" type="number" step="0.01" disabled data-v-rate-cost>
+										  </td>
+										  <td class="text-end">
+											<button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger">
+											  <svg class="svg-icon la-lg" aria-hidden="true"><use href="/admin/default/img/icons.svg#circle-minus"></use></svg>
+											</button>
+										  </td>
+										</tr>
+										<tr class="d-none rate-template">
+										  <td class="text-start">
+												<input name="methods[0][rates][#][price_from]" value="0.00" placeholder="0.00" class="form-control method" type="number" step="0.01" disabled data-v-rate-price_from>
+										  </td>
+										  <td class="text-end">
+												<input name="methods[0][rates][#][cost]" value="0.00" placeholder="0.00" class="form-control method" type="number" step="0.01" disabled data-v-rate-cost>
+										  </td>
+										  <td class="text-end">
+											<button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger">
+											  <svg class="svg-icon la-lg" aria-hidden="true"><use href="/admin/default/img/icons.svg#circle-minus"></use></svg>
+										</button>
+									  </td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+				</div>
+			 </div>
+
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </main>
+  </div>
+
+  <script>
+	document.addEventListener("DOMContentLoaded", function() {
+		// 1. Sync hidden input on page load with whichever tab is active
+		let activeTabEl = document.querySelector('[data-v-methods] a[data-bs-toggle="tab"].active');
+		if (activeTabEl) {
+			let allTabs = Array.from(document.querySelectorAll('[data-v-methods] a[data-bs-toggle="tab"]'));
+			let activeIdx = allTabs.indexOf(activeTabEl);
+			if (activeIdx !== -1) {
+				document.getElementById('active_tab').value = activeIdx;
+			}
+		}
+
+		// 2. Track tab switching when user manually clicks tabs
+		document.querySelectorAll('[data-v-methods] a[data-bs-toggle="tab"]').forEach((tabEl) => {
+			tabEl.addEventListener('shown.bs.tab', function (e) {
+				let allTabs = Array.from(document.querySelectorAll('[data-v-methods] a[data-bs-toggle="tab"]'));
+				document.getElementById('active_tab').value = allTabs.indexOf(e.target);
+			});
+		});
+	});
+
+	function addMethodRate(btn) {
+		// 1. Find the parent .tab-pane container
+		let tabPane = btn.closest('.tab-pane');
+		if (!tabPane) return;
+
+		// 2. Extract the exact index from id="tab-0", id="tab-1", etc.
+		let methodIndex = 0;
+		if (tabPane.id && tabPane.id.startsWith('tab-')) {
+			methodIndex = parseInt(tabPane.id.replace('tab-', ''), 10);
+		}
+
+		// 3. Clone and re-index inputs for this specific method
+		let targetTable = tabPane.querySelector('.rates-table tbody') || tabPane.querySelector('[data-v-rates] tbody');
+		let templateRow = tabPane.querySelector('.rate-template');
+
+		if (templateRow && targetTable) {
+			let newRow = templateRow.cloneNode(true);
+			newRow.classList.remove('d-none', 'rate-template');
+
+			let currentCount = targetTable.querySelectorAll('tr:not(.rate-template)').length;
+
+			newRow.querySelectorAll('input, select').forEach(input => {
+				input.removeAttribute('disabled');
+
+				if (input.name) {
+					input.name = input.name
+						.replace(/methods\[\d+\]/, 'methods[' + methodIndex + ']')
+						.replace('[#]', '[' + currentCount + ']');
+				}
+			});
+
+			targetTable.appendChild(newRow);
+		}
+	}
+  </script>
+
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script id="admin-js" type="module" src="/js/admin.js"></script>
+  <script type="module" src="/js/admin.js"></script>
+  <script id="functions-js" src="/js/admin/functions.js"></script>
+
+</body>
+</html>
