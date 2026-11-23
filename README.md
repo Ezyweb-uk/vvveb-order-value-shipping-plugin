@@ -66,18 +66,20 @@ one Ezyweb's [CSP Manager](https://github.com/Ezyweb-uk/vvveb-csp-manager-plugin
   When CSP Manager **enforces** its policy, the browser blocks both, so the shipping section isn't refreshed:
   in testing, a customer who switched from the United States to the United Kingdom was still offered, and
   charged, US delivery.
-- **What keeps it working:** the [PayPal Smart Buttons plugin](https://github.com/Ezyweb-uk/vvveb-paypal-smart-buttons-plugin)
-  0.4 or later loads a compatibility script whenever CSP Manager enforces, which restores the region list,
-  the shipping refresh and the address toggles from an allowed file. A theme that has moved this code into its
-  own script files works too. In CSP Manager's report-only mode nothing is blocked.
+- **What keeps it working:** CSP Manager 0.5 or later adds a small compatibility script whenever its enforced
+  policy blocks the theme's inline code, which restores the region list, the shipping refresh and the address
+  toggles from an allowed file. (With CSP Manager 0.4, the
+  [PayPal Smart Buttons plugin](https://github.com/Ezyweb-uk/vvveb-paypal-smart-buttons-plugin) 0.4 or later
+  supplied it, so it only worked with that plugin active.) A theme that has moved this code into its own
+  script files works too. In CSP Manager's report-only mode nothing is blocked.
 
-Tested on Vvveb 1.0.9.0 with Landing, CSP Manager 0.4 and PayPal Smart Buttons 0.4:
+Tested on Vvveb 1.0.9.0 with Landing:
 
 | Checkout | United Kingdom chosen | United States chosen |
 |---|---|---|
 | CSP Manager report-only | UK delivery, +4.00 | US delivery, +15.00 |
-| CSP Manager enforce, with the compatibility script | UK delivery, +4.00 | US delivery, +15.00 |
-| CSP Manager enforce, no compatibility script | still US delivery, +15.00 | US delivery, +15.00 |
+| CSP Manager 0.5 enforce (with or without PayPal Smart Buttons) | UK delivery, +4.00 | US delivery, +15.00 |
+| CSP Manager 0.4 enforce, without PayPal Smart Buttons | still US delivery, +15.00 | US delivery, +15.00 |
 
 ## Version history
 
