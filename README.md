@@ -68,10 +68,8 @@ one Ezyweb's [CSP Manager](https://github.com/Ezyweb-uk/vvveb-csp-manager-plugin
   charged, US delivery.
 - **What keeps it working:** CSP Manager 0.5 or later adds a small compatibility script whenever its enforced
   policy blocks the theme's inline code, which restores the region list, the shipping refresh and the address
-  toggles from an allowed file. (With CSP Manager 0.4, the
-  [PayPal Smart Buttons plugin](https://github.com/Ezyweb-uk/vvveb-paypal-smart-buttons-plugin) 0.4 or later
-  supplied it, so it only worked with that plugin active.) A theme that has moved this code into its own
-  script files works too. In CSP Manager's report-only mode nothing is blocked.
+  toggles from an allowed file. A theme that has moved this code into its own script files works too. In CSP
+  Manager's report-only mode nothing is blocked.
 
 Tested on Vvveb 1.0.9.0 with Landing:
 
@@ -80,18 +78,11 @@ Tested on Vvveb 1.0.9.0 with Landing:
 | CSP Manager report-only | UK delivery, +4.00 | US delivery, +15.00 |
 | CSP Manager 0.5 enforce (with or without PayPal Smart Buttons) | UK delivery, +4.00 | US delivery, +15.00 |
 
-If you enforce the policy with CSP Manager 0.4, keep PayPal Smart Buttons 0.4 or later active (it supplied the
-script before CSP Manager 0.5), or update CSP Manager. Without either, a customer who changes country is still
-offered the previous country's shipping.
-
 ## Version history
 
-- **0.3** (2026-11-23): checked with Vvveb 1.0.9.0 and the Oct 2026 Landing theme. Tiers are sorted by
-  "from order value", so they work in any entry order (they had to be entered lowest first). Plugin list icon
-  fixed (it named a file the plugin didn't have) and changed to the admin's Tabler truck style. Copyright
-  notice, AGPLv3 LICENSE and this README added.
-- **0.2**: settings page updated for the Vvveb 1.0.9.0 admin (SVG icons, new header layout).
-- **0.1**: order value tiers per region group, based on the Default Shipping plugin.
+- **0.3** (2026-11-23): current release, tested with Vvveb 1.0.9.0 and the Oct 2026 Landing theme. Earlier
+  versions were development releases.
+
 
 ## Licence
 
