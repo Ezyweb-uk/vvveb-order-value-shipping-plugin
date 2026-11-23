@@ -79,7 +79,10 @@ Tested on Vvveb 1.0.9.0 with Landing:
 |---|---|---|
 | CSP Manager report-only | UK delivery, +4.00 | US delivery, +15.00 |
 | CSP Manager 0.5 enforce (with or without PayPal Smart Buttons) | UK delivery, +4.00 | US delivery, +15.00 |
-| CSP Manager 0.4 enforce, without PayPal Smart Buttons | still US delivery, +15.00 | US delivery, +15.00 |
+
+If you enforce the policy with CSP Manager 0.4, keep PayPal Smart Buttons 0.4 or later active (it supplied the
+script before CSP Manager 0.5), or update CSP Manager. Without either, a customer who changes country is still
+offered the previous country's shipping.
 
 ## Version history
 
