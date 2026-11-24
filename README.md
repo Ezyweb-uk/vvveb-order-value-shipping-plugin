@@ -34,6 +34,13 @@ Example, a "UK delivery" method limited to a UK region group:
 
 with free shipping from 250: a £99 order pays £4.00, a £160 order £2.00, and a £260 order nothing.
 
+## Settings
+
+**Plugins › Order Value Shipping › Settings**, showing a UK delivery method with three tiers and free shipping
+from 250 (example values). Tiers can be entered in any order; each method has its own tab.
+
+![Order Value Shipping settings: shipping method tab with region, base cost, free shipping threshold and order subtotal tiers](docs/screenshots/settings.png)
+
 ## Requirements
 
 - Vvveb 1.0.9.0 or later.
